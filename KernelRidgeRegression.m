@@ -126,11 +126,6 @@ function K = kernelmatrix(ker,X,X2,sigma,b,d)
             %
             % Output:
             %       K: kernel matrix
-            %
-            % Gustavo Camps-Valls
-            % 2006(c)
-            % Jordi (jordi@uv.es), 2007
-            % 2007-11: if/then -> switch, and fixed RBF kernel
             switch ker
                 case 'lin'
                     if exist('X2','var')
