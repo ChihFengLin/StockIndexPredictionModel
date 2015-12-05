@@ -15,7 +15,8 @@ prediction_RMSE = zeros(fold, 1);
 best_gamma = 0;
 best_lambda = 0;
 min_err = Inf;
-trained_classifier = zeros(size(target, 2), 3);   % trained_classifier = [gamma lambda RMSE]
+std_val = 0;
+trained_classifier = zeros(size(target, 2), 4);   % trained_classifier = [gamma lambda RMSE stdOfRMSE]
 
 % rbf kernel ridge regression parameter (gamma, lambda) 
 for gamma = [2^-17 2^-16 2^-15 2^-14 2^-13 2^-12 2^-11 2^10 2^-9 2^-8 2^-7 2^-6 2^-5 2^-4 2^-3]
@@ -36,6 +37,7 @@ for gamma = [2^-17 2^-16 2^-15 2^-14 2^-13 2^-12 2^-11 2^10 2^-9 2^-8 2^-7 2^-6 
 
         if mean(prediction_RMSE) < min_err
             min_err = mean(prediction_RMSE);
+            std_val = std(prediction_RMSE);
             best_gamma = gamma;
             best_lambda = lambda;
         end
@@ -45,6 +47,7 @@ end
 trained_classifier(1, 1) = best_gamma;
 trained_classifier(1, 2) = best_lambda;
 trained_classifier(1, 3) = min_err;
+trained_classifier(1, 4) = std_val;
 
 end
 

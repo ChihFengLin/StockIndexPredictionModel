@@ -13,7 +13,7 @@ training = normalization(training);
 testing = normalization(testing);
 
 % Use cross-validation to train RBF kernel ridge regressor
-% trainRBFClassifier will return [gamma lambda minRMSE] which gamma is the
+% trainRBFClassifier will return [gamma lambda minRMSE stdOfRMSE] which gamma is the
 % parameter for gaussian kernel and lambda is regularization parameter
 fold = 10;
 trained_classifier = trainRBFClassifier(training, target, fold);
