@@ -83,11 +83,11 @@ if __name__ == '__main__':
 	new_testing = generateNewFeature(testing, ranking)
 	
 	# Save parsed data
-	np.savetxt('training.csv', new_training, delimiter=',')
-	np.savetxt('testing.csv', new_testing, delimiter=',')
-	np.savetxt('target.csv', target, delimiter=',')
-	np.savetxt('date_training.csv', date_training, delimiter=',', fmt="%s")
-	np.savetxt('date_testing.csv', date_testing, delimiter=',', fmt="%s")
+	np.savetxt('./data/training.csv', new_training, delimiter=',')
+	np.savetxt('./data/testing.csv', new_testing, delimiter=',')
+	np.savetxt('./data/target.csv', target, delimiter=',')
+	np.savetxt('./data/date_training.csv', date_training, delimiter=',', fmt="%s")
+	np.savetxt('./data/date_testing.csv', date_testing, delimiter=',', fmt="%s")
 
 
 
