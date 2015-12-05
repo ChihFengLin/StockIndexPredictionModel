@@ -1,0 +1,59 @@
+function trainRBFClassifier(training, target, fold)
+
+
+% Data normalization for training data(feature scaling between 0 to 1)
+training = normalization(training);
+
+% k-fold cross validation
+index = 1;
+num_in_group = round(size(training, 1) / fold);
+append_index = zeros(size(training, 1), 1);
+for i = 1 : size(newTrain, 1)
+    if (mod(i,num_in_group) == 0)
+        index = index + 1;
+    end
+    append_index(i, 1) = index;
+end
+train_append_index = [append_index newTrain];
+prediction_RMSE = zeros(fold, 1);
+best_gamma = 0;
+best_lambda = 0;
+min_err = Inf;
+trained_classifier = zeros(size(labels, 2), 3);   % trained_classifier = [gamma lambda]
+
+for classifier_num = 1 : size(missIdx, 2)
+    % rbf kernel ridge regression parameter (gamma, lambda) 
+    for gamma = [2^-15 2^-13 2^-11 2^-9 2^-7]
+        for lambda = [0.1 0.01 0.001 0.0001]
+            for i = 1 : fold
+                % partition data for different fold
+                idx_test = find(train_append_index(:, 1) == i);
+                idx_train = find(train_append_index(:, 1) ~= i);
+                trainData = newTrain(idx_train, :); testData = newTrain(idx_test,:);
+                trainLabel = labels(idx_train, classifier_num); testLabel = labels(idx_test, classifier_num);
+                
+                % Kernelized Ridge Regression
+                sigma = sqrt(1/(2*gamma));
+                %lambda = 10^-3;
+                KernelRegression =KernelRidgeRegression(['rbf'], trainData, sigma, trainLabel, lambda);
+                ypred=KernelPrediction(KernelRegression, testData);
+                prediction_RMSE(i, 1) = sqrt(mean((ypred-testLabel).^2));
+            end
+            
+            if mean(prediction_RMSE) < min_err
+                min_err = mean(prediction_RMSE);
+                best_gamma = gamma;
+                best_lambda = lambda;
+            end
+        end 
+    end
+    
+    trained_classifier(classifier_num, 1) = best_gamma;
+    trained_classifier(classifier_num, 2) = best_lambda;
+    trained_classifier(classifier_num, 3) = min_err;
+    best_gamma = 0;
+    best_lambda = 0;
+    min_err = Inf;
+end
+
+end
