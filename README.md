@@ -6,4 +6,4 @@ This problem is a regression problem and the model can be splited into two parts
 >1. Estimate the importance of features **(featureScoring.py)**<br/>  
 >2. Training gaussian kernel ridge regression model **(main.m)**<br/>  
 
-
+## Feature Scoring
