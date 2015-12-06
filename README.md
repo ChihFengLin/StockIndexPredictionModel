@@ -18,7 +18,7 @@ This feature scoring method is based on Random Forest to estimate the importance
 ## Training Gaussian Kernel Ridge Regression Model
 *To execute this step, you need launch Matlab program and run main.m. It will generate the final prediction.csv file.*
 
-For this problem, I choose kernelized ridge regression method with gaussian kernel which can effectively deal with non-linear dataset to achieve higher prediction accuracy. Among this model, there are two hyper-perameters: **gamma** and **lambda**. Gamma is the parameter for gaussian kernel and lambda is regularization parameter. In the main program, I implement n-fold cross-validation to tune the best combination of these two parameters and use RMSE to evaluate model performance.
+For this problem, I choose kernelized ridge regression method with gaussian kernel which can effectively deal with non-linear dataset to achieve higher prediction accuracy. Among this model, there are two hyper-parameters: **gamma** and **lambda**. Gamma is the parameter for gaussian kernel and lambda is regularization parameter. In the main program, I implement n-fold cross-validation to tune the best combination of these two parameters and use RMSE to evaluate model performance.
     
     RMSE = sqrt(mean((predictedValue - trueValue).^2))
     

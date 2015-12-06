@@ -26,6 +26,12 @@ trained_sigma = sqrt(1/(2*trained_gamma));
 KernelRegression = KernelRidgeRegression(['rbf'], training, trained_sigma, target, trained_lambda);
 result(:, 1)=KernelPrediction(KernelRegression, testing);
 
+% % Plot result
+% plot(result)
+% title('Daily Percentage Changes of Opening Price to Closing Price - S&P Index', 'FontSize',12)
+% xlabel('Days', 'FontSize',14)
+% ylabel('Percentage Changes (%)', 'FontSize',14)
+
 % Generate output
 answer = cell(size(result, 1) + 1, 2);
 answer(1, :) = {'Date', 'Value'};
